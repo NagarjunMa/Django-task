@@ -6,7 +6,11 @@ urlpatterns = [
     path("products/", views.retrieveProducts, name="retrieveProducts"),
     path("product/<str:pk>", views.retrieveDetail, name="retrieveDetail"),
     path("product/create/", views.createProduct, name="createProduct"),
+    
     path("product/update/<str:pk>", views.updateProduct, name="updateProduct"),
     path("product/delete/<str:pk>", views.deleteProduct, name="deleteProduct"),
+    path("register/", views.registerPage, name="register"),
+    path("login/", views.loginPage, name="login"),
+    path("logout/", views.logoutUser, name="logout"),
 
 ]
