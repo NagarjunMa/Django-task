@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import dj_database_url
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -81,16 +82,20 @@ WSGI_APPLICATION = 'kaizntreeDjango.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'kaizntreeDb',
-        'USER':'root',
-        'PASSWORD':'Kamana@7897',
-        'HOST':'localhost',
-        'PORT':'3306'
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'kaizntreeDb',
+#         'USER':'root',
+#         'PASSWORD':'Kamana@7897',
+#         'HOST':'localhost',
+#         'PORT':'3306'
+#     }
+# }
+
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_from_env)
+
 
 
 # Password validation
