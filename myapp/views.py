@@ -10,7 +10,7 @@ import json
 import sys
 from .forms import CreateUserForm
 from django.contrib.auth import authenticate, login, logout
-
+from .filters import ProductFilter
 
 from django.contrib.auth.decorators import login_required
 
@@ -18,15 +18,18 @@ from django.contrib.auth.decorators import login_required
 @login_required(login_url='login')
 def home(request): 
     if request.user.is_authenticated:
-        return render(request, 'accounts/home.html')
+        return render(request, 'accounts/dashboard.html')
     else:
         context={} # request is the parameter that is passed to the function
         return render(request, 'accounts/home.html', context)
+    
+
+
 
 @login_required(login_url='login')
 def registerPage(request):
     if request.user.is_authenticated:
-        return redirect('home')
+        return redirect('dashboard')
     else:
         form = CreateUserForm()
 
@@ -44,7 +47,7 @@ def registerPage(request):
 
 def loginPage(request):
     if request.user.is_authenticated:
-        return redirect('home')
+        return redirect('dashboard')
     else:
         if request.method == "POST":
              username = request.POST.get('username')
@@ -100,3 +103,19 @@ def deleteProduct(request,pk):
     product = Product.objects.get(id=pk)
     product.delete()
     return Response("Product deleted successfully")
+
+
+def dashboard(request):
+    if request.user.is_authenticated:
+        products = Product.objects.all()
+
+        myFilter = ProductFilter(request.GET, queryset=products)
+        products = myFilter.qs
+
+        total_items = products.count()
+        total_categories = Product.objects.values('category').distinct().count()
+        serializers = ProductSerializers(products, many=True)
+        return render(request, 'accounts/dashboard.html', {'products':serializers.data, 'total_items': total_items, 'total_categories': total_categories, 'myFilter': myFilter})
+    else:
+        return redirect('login')
+

@@ -1,0 +1,76 @@
+{% extends 'accounts/main.html' %}
+
+
+{% block content %}
+
+
+<br>
+
+<div class="row">
+    <div class="col-md mb-4">
+        <div class="card card-body">
+            <h5 class="mb-2 text-center">Items Dashboard: </h5>
+            <div class="row  ">
+                <div class="col">
+                    <a class="btn btn-outline-info btn-lg btn-block" href="#">Add Items</a>
+                </div>
+                <div class="col">
+                    <a class="btn btn-outline-danger btn-lg btn-block" href="#">Add Category</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md">
+        <div class="card card-body">
+            <p>Total Orders: {{total_items}}</p>
+            <p>Total Categories: {{total_categories}}</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="card card-body">
+                <form method="get">
+                    {{myFilter.form.as_p}}
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md text-center">
+            <h5>Items Dashboard</h5>
+            <div class="card card-body">
+                <table class="table table-sm">
+                    <tr>
+                        <th>SKU:</th>
+                        <th>Name:</th>
+                        <th>Category:</th>
+                        <th>Tags</th>
+                        <th>InStock</th>
+                        <th>Available Stock</th>
+                    </tr>
+
+                    {% for item in products%}
+                    <tr>
+                        <td>{{item.SKU}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.category}}</td>
+                        <td>{{item.tags}}</td>
+                        <td>{{item.in_stock}}</td>
+                        <td>{{item.available_stock}}</td>
+                    </tr>
+                    {% endfor %}
+
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
