@@ -118,4 +118,12 @@ def dashboard(request):
         return render(request, 'accounts/dashboard.html', {'products':serializers.data, 'total_items': total_items, 'total_categories': total_categories, 'myFilter': myFilter})
     else:
         return redirect('login')
+    
+
+# Function to handle a redirect to the add product form
+def redirect_to_add_product(request):
+    # Redirect to the URL for adding a product
+    context ={}
+    return render(request, 'accounts/add_products.html', context)
+
 
