@@ -19,38 +19,3 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.name
-    
-
-# class TagSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Tag
-#         fields = ['name']
-
-# class ProductSerializer(serializers.ModelSerializer):
-#     tags = TagSerializer(many=True, read_only=True)
-#     class Meta:
-#         model = Product
-#         fields = ['SKU','name','category','tags','in_stock','available_stock']
-
-# class ProductCreateUpdateSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Product
-#         fields = ['SKU','name','category','tags','in_stock','available_stock']  
-        
-#     # Override the create and update methods to handle the ManyToMany field 
-#     def create(self, validated_data):
-#         tags = validated_data.pop('tags')
-#         product = Product.objects.create(**validated_data)
-#         for tag in tags:
-#             tag, created = Tag.objects.get_or_create(name=tag['name'])
-#             product.tags.add(tag)
-#         return product
-
-#     def update(self, instance, validated_data):
-#         tags = validated_data.pop('tags')
-#         product = super().update(instance, validated_data)
-#         product.tags.clear()
-#         for tag in tags:
-#             tag, created = Tag.objects.get_or_create(name=tag['name'])
-#             product.tags.add(tag)
-#         return product  
