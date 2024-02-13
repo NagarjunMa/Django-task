@@ -1,1 +1,1 @@
-web: gunicorn kaizntreeDjango.wsgi
+web: gunicorn kaizntreeDjango.wsgi --log-file -
