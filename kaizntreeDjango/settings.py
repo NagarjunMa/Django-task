@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-%1!*p*mgmwgt2u-o*quiyz57(xn4a8xxb53%l_a3#wo_1ly1oq
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['nagarjunmallesh-django-eb3bcd6c2104.herokuapp.com','127.0.0.1']
+ALLOWED_HOSTS = ['django-task-nm-cda857f8d0ee.herokuapp.com','127.0.0.1']
 
 
 # Application definition
@@ -88,7 +88,7 @@ import os
 from urllib.parse import urlparse
 
 # Parse the database URL from the environment variable
-DATABASE_URL = os.environ.get("mysql://knn7kj2qzuqsg05l:vw76bl8enbysn3bw@u28rhuskh0x5paau.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/rm4e6p6w1d1l6vdr")
+DATABASE_URL = os.environ.get("mysql://kvknhgfhf4kgqniw:gwwka6n2merffofy@u28rhuskh0x5paau.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/idugzvlwdjjnsptm")
 if DATABASE_URL:
     url = urlparse(DATABASE_URL)
 
