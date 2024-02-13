@@ -84,16 +84,33 @@ WSGI_APPLICATION = 'kaizntreeDjango.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'os.pah.join(BASE_DIR, "db.sqlite3")',
-}
-}
+import os
+from urllib.parse import urlparse
 
-import dj_database_url
-db_from_env = dj_database_url.config(conn_max_age=600)
-DATABASES['default'].update(db_from_env)
+# Parse the database URL from the environment variable
+DATABASE_URL = os.environ.get("mysql://knn7kj2qzuqsg05l:vw76bl8enbysn3bw@u28rhuskh0x5paau.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/rm4e6p6w1d1l6vdr")
+if DATABASE_URL:
+    url = urlparse(DATABASE_URL)
+
+    # Extract the database connection parameters
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',  # Adjust this to match your database backend
+            'NAME': url.path[1:],  # Removes the leading '/'
+            'USER': url.username,
+            'PASSWORD': url.password,
+            'HOST': url.hostname,
+            'PORT': url.port,
+        }
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
+
 
 
 
