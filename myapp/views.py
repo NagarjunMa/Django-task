@@ -24,7 +24,7 @@ def home(request):
         return render(request, 'accounts/home.html', context)
     
 
-
+  
 
 def registerPage(request):
     if request.user.is_authenticated:
