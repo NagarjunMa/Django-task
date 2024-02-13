@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "django_filters",
     "drf_yasg",
     "corsheaders",
+    "dj_database_url"
 ]  
 
 MIDDLEWARE = [
